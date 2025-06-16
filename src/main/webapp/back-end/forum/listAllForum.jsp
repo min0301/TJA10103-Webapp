@@ -116,8 +116,8 @@
         /* 您可能需要根據實際內容長度微調這些值 */
         table th:nth-child(1), /* 討論區編號 */
         table td:nth-child(1) {
-            width: 50px; /* 較小寬度 */
-            min-width: 50px;
+            width: 30px; /* 較小寬度 */
+            min-width: 30px;
             text-align: center; /* 讓編號居中 */
             
         }
@@ -131,8 +131,8 @@
 
         table th:nth-child(3), /* 討論區類別 */
         table td:nth-child(3) {
-            width: 80px;
-            min-width: 100px;
+            width: 30px;
+            min-width: 30px;
             text-align: center; 
         }
 
@@ -162,17 +162,15 @@
 
         table th:nth-child(7), /* 聊天室狀態 */
         table td:nth-child(7) {
-            width: 80px;
-            min-width: 80px;
+            width: 70px;
+            min-width: 70px;
             text-align: center; /* 讓狀態居中 */
             white-space: nowrap; /* 確保狀態不換行 */
         }
 
         /* 操作按鈕欄位 */
         table th:nth-child(8), /* 操作 (修改) */
-        table td:nth-child(8),
-        table th:nth-child(9), /* 操作 (刪除) */
-        table td:nth-child(9) {
+        table td:nth-child(8) {
             width: 70px; /* 固定操作按鈕的寬度 */
             min-width: 70px;
             text-align: center;
@@ -227,6 +225,15 @@
         input[value="刪除"]:hover {
             background-color: #c82333; /* 懸停變深 */
         }
+        
+                /* 針對上傳圖片按鈕特別設定，使用綠色 */
+        input[value="上傳圖片"] {
+            background-color: #228B22; /* 綠色 */
+        }
+
+        input[value="上傳圖片"]:hover {
+            background-color: #1a711a; /* 懸停變深 */
+        }
 
         /* 分頁檔案的樣式，如果 page1.file 和 page2.file 有內容，需要另外調整 */
         .pagination-controls {
@@ -254,7 +261,7 @@
 <div class="container">
     <div class="header-section">
         <h3>所有討論區列表</h3>
-        <a href="select_page.jsp" class="back-link">
+        <a href="<%=request.getContextPath() %>/back-end/forum/select_page.jsp" class="back-link">
             <img src="<%=request.getContextPath()%>/resources/images/back1.gif" width="24" height="24" alt="回首頁">
             回首頁
         </a>
@@ -273,7 +280,6 @@
                 <th>狀態更新時間</th>
                 <th>聊天室狀態</th>
                 <th>操作</th>
-                <th>操作</th>
             </tr>
         </thead>
         <tbody>
@@ -289,12 +295,17 @@
                     <td>${forumVO.fchatStatus == 0 ? "開啟" : "關閉"}</td>
                     <td>
                         <form method="post" action="<%=request.getContextPath()%>/back-end/forum/forum.do">
+                            <input type="submit" value="上傳圖片">
+                            <input type="hidden" name="forNo"  value="${forumVO.forNo}">
+                            <input type="hidden" name="action" value="123">
+                        </form>
+                        
+                        <form method="post" action="<%=request.getContextPath()%>/back-end/forum/forum.do">
                             <input type="submit" value="修改">
                             <input type="hidden" name="forNo"  value="${forumVO.forNo}">
                             <input type="hidden" name="action"	value="getOne_For_Update">
                         </form>
-                    </td>
-                    <td>
+
                         <form method="post" action="<%=request.getContextPath()%>/back-end/forum/forum.do">
                             <input type="submit" value="刪除">
                             <input type="hidden" name="forNo"  value="${forumVO.forNo}">

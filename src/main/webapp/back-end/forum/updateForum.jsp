@@ -220,23 +220,24 @@
                     <input type="TEXT" name="forName" value="<%=forumVO.getForName()%>" placeholder="請輸入討論區名稱"/>
                 </td>
             </tr>
-            <tr>
+            
+<%--             	<jsp:useBean id="forumSvc" scope="page" class="com.forum.model.ForumService" />
+			<tr>
+				<td>討論區類別:<font color=red><b>*</b></font></td>
+				<td><select size="10" name="catNo">
+					<c:forEach var="forumVO" items="${forumSvc.all}">
+						<option value="${forumVO.catNo}" ${(forumVO.catNo==forumVO.catNo)?'selected':'' } >${forumVO.catName}
+					</c:forEach>
+				</select></td>
+			</tr> --%>
+            
+             <tr>
                 <td class="label-column">討論區類別:</td>
-                <%-- 假設您最終會使用下拉選單來選擇討論區類別，目前保留文字輸入框 --%>
                 <td class="input-column">
                     <input type="TEXT" name="catNo" value="<%=forumVO.getCatNo()%>" placeholder="請輸入討論區類別編號"/>
-                    <%-- 如果未來想啟用下拉選單，可以參考以下範例（需要ForumCategoryService和ForumCategoryVO）：
-                    <jsp:useBean id="forumCategorySvc" scope="page" class="com.forum.model.ForumCategoryService" />
-                    <select name="catNo">
-                        <c:forEach var="forumCategoryVO" items="${forumCategorySvc.all}">
-                            <option value="${forumCategoryVO.catNo}" ${forumVO.catNo == forumCategoryVO.catNo ? 'selected' : ''}>
-                                ${forumCategoryVO.catName}
-                            </option>
-                        </c:forEach>
-                    </select>
-                    --%>
                 </td>
             </tr>
+            
             <tr>
                 <td class="label-column">討論區描述:</td>
                 <td class="input-column">

@@ -117,6 +117,63 @@ if (forumVO == null) {
             font-weight: bold;
             text-transform: uppercase;
         }
+        
+                /* 調整特定列的寬度，以防止文字換行 */
+        /* 您可能需要根據實際內容長度微調這些值 */
+        table th:nth-child(1), /* 討論區編號 */
+        table td:nth-child(1) {
+            width: 80px; /* 較小寬度 */
+            min-width: 80px;
+            text-align: center; /* 讓編號居中 */
+            
+        }
+
+        table th:nth-child(2), /* 討論區名稱 */
+        table td:nth-child(2) {
+            width: 150px; /* 給予更多空間 */
+            min-width: 150px;
+            text-align: center; 
+        }
+
+        table th:nth-child(3), /* 討論區類別 */
+        table td:nth-child(3) {
+            width: 80px;
+            min-width: 80px;
+            text-align: center; 
+        }
+
+        table th:nth-child(4), /* 討論區描述 */
+        table td:nth-child(4) {
+            width: 300px; /* 增加描述的寬度，這是最容易換行的部分 */
+            min-width: 300px;
+            white-space: normal; /* 允許描述內容自然換行，如果仍需單行顯示，請刪除此行並使用 `white-space: nowrap;` */
+            text-align: center; 
+        }
+
+        table th:nth-child(5), /* 創建時間 */
+        table td:nth-child(5) {
+            width: 90px;
+            min-width: 90px;
+            white-space: nowrap; /* 確保日期不換行 */
+            text-align: center; 
+        }
+
+        table th:nth-child(6), /* 狀態更新時間 */
+        table td:nth-child(6) {
+            width: 90px;
+            min-width: 90px;
+            white-space: nowrap; /* 確保日期不換行 */
+            text-align: center; 
+        }
+
+        table th:nth-child(7), /* 聊天室狀態 */
+        table td:nth-child(7) {
+            width: 70px;
+            min-width: 70px;
+            text-align: center; /* 讓狀態居中 */
+            white-space: nowrap; /* 確保狀態不換行 */
+        }
+
 
         /* Table row alternating colors (less noticeable for single row, but maintains consistency) */
         tbody tr:nth-child(even) {
@@ -150,7 +207,7 @@ if (forumVO == null) {
             <tr>
                 <th>討論區編號</th>
                 <th>討論區名稱</th>
-                <th>類別編號</th>
+                <th>討論區類別</th>
                 <th>討論區描述</th>
                 <th>創建時間</th>
                 <th>狀態更新時間</th>
@@ -161,7 +218,7 @@ if (forumVO == null) {
             <tr>
                 <td><%=forumVO.getForNo()%></td>
                 <td><%=forumVO.getForName()%></td>
-                <td><%=forumVO.getCatNo()%></td>
+                <td><%=forumVO.getCatName()%></td>
                 <td><%=forumVO.getForDes()%></td>
                 <td><%=forumVO.getForDate()%></td>
                 <td><%=forumVO.getForUpdate()%></td> 

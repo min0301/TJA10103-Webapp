@@ -10,9 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.emp.model.EmpJDBCDAO;
-import com.emp.model.EmpVO;
-import com.forumcategory.model.ForumCategoryVO;
 
 public class ForumJDBCDAO implements ForumDAO_interface {
 
@@ -178,6 +175,13 @@ public class ForumJDBCDAO implements ForumDAO_interface {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
+			
+			pstmt = con.prepareStatement(GET_ALL_CAT);
+			rs = pstmt.executeQuery();
+			Map<Integer,String> catall = new HashMap<Integer,String>();
+			while(rs.next()) {
+				catall.put(rs.getInt("CAT_NO"), rs.getString("CAT_NAME"));
+			}
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 			
 			pstmt.setInt(1, forNo);
@@ -188,7 +192,8 @@ public class ForumJDBCDAO implements ForumDAO_interface {
 				forumVO = new ForumVO();
 				forumVO.setForNo(rs.getInt("FOR_NO"));
 				forumVO.setForName(rs.getString("FOR_NAME"));
-				forumVO.setCatNo(rs.getInt("CAT_NO"));
+				forumVO.setCatName(catall.get(rs.getInt("CAT_NO")));
+				forumVO.setCatNo(rs.getInt("CAT_NO")	);
 				forumVO.setForDes(rs.getString("FOR_DES"));
 				forumVO.setForDate(rs.getDate("FOR_DATE"));
 				forumVO.setForUpdate(rs.getDate("FOR_UPDATE"));
@@ -248,6 +253,7 @@ public class ForumJDBCDAO implements ForumDAO_interface {
 				forumVO = new ForumVO();
 				forumVO.setForNo(rs.getInt("FOR_NO"));
 				forumVO.setForName(rs.getString("FOR_NAME"));
+				forumVO.setCatNo(rs.getInt("CAT_NO"));
 				forumVO.setCatName(catMap.get(rs.getInt("CAT_NO")));
 				forumVO.setForDes(rs.getString("FOR_DES"));
 				forumVO.setForDate(rs.getDate("FOR_DATE"));
@@ -332,6 +338,7 @@ public class ForumJDBCDAO implements ForumDAO_interface {
 			System.out.print(aForum.getForNo() + ",");
 			System.out.print(aForum.getForName() + ",");
 			System.out.print(aForum.getCatNo() + ",");
+			System.out.print(aForum.getCatName() + ",");
 			System.out.print(aForum.getForDes() + ",");
 			System.out.print(aForum.getForDate() + ",");
 			System.out.print(aForum.getForUpdate() + ",");

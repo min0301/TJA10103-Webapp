@@ -2,7 +2,6 @@ package com.forum.model;
 
 import java.util.List;
 
-import com.emp.model.EmpVO;
 
 public interface ForumDAO_interface {
 	
